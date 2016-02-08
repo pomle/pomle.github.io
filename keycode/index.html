@@ -21,6 +21,7 @@
     <script type="text/javascript">
         var element = document.getElementById('keycode');
         window.addEventListener('keydown', function(event) {
+            event.preventDefault();
             element.innerText = event.keyCode;
         });
     </script>
