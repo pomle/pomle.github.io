@@ -9,7 +9,6 @@ window.addEventListener('load', function() {
 
   function handleKey(event) {
     const keyName = event.target.id;
-    document.body.classList.toggle('touching');
     if (!keyName) {
       return;
     }
@@ -17,15 +16,12 @@ window.addEventListener('load', function() {
       key: keyName,
       state: eventMap[event.type],
     };
-    console.log(payload);
+    document.body.classList.toggle('touching');
     conn.send(payload);
   }
 
   controller.contentDocument.addEventListener('touchstart', handleKey);
   controller.contentDocument.addEventListener('touchend', handleKey);
-  controller.contentDocument.addEventListener('touchmove', event => {
-    event.preventDefault();
-  });
 
   const id = window.location.hash.split('#')[1];
 
