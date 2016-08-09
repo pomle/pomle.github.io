@@ -1,4 +1,5 @@
 window.addEventListener('load', function() {
+  
   const controller = document.getElementById('controller');
 
   const eventMap = {
@@ -8,6 +9,7 @@ window.addEventListener('load', function() {
 
   function handleKey(event) {
     const keyName = event.target.id;
+    document.body.classList.toggle('touching');
     if (!keyName) {
       return;
     }
