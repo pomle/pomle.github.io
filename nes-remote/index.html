@@ -4,10 +4,26 @@
   <meta name="viewport" content="width=device-width"/>
   <title>NES-Remote</title>
   <link href="./style.css" rel="stylesheet" />
+  <style>
+    body {
+      background-color: #000;
+    }
+    body.touching {
+      background-color: #ff0000;
+    }
+  </style>
   <script src="http://cdn.peerjs.com/0.3/peer.min.js"></script>
   <script type="text/javascript" src="./nes-remote.js"></script>
 </head>
 <body>
   <object data="./nes-controller.svg" type="image/svg+xml" id="controller"></object>
+    <script>
+    document.body.addEventListener('touchstart', function(e) {
+      document.body.classList.add('touching');
+    });
+    document.body.addEventListener('touchend', function(e) {
+      document.body.classList.remove('touching');
+    });
+  </script>
 </body>
 </html>
