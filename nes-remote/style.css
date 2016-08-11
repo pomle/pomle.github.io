@@ -6,6 +6,5 @@ body {
 }
 
 #controller {
-  touch-action: manipulation;
   width: 100%;
 }
