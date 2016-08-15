@@ -5,6 +5,10 @@ body {
   margin: 0;
 }
 
+body.highlight {
+  background-color: #ff0000;
+}
+
 #controller {
   width: 100%;
 }
