@@ -33,6 +33,7 @@ window.addEventListener('load', function() {
     };
     console.log('Sending update', payload);
     if (conn) {
+      document.body.classList.toggle('highlight');
       conn.send(payload);
     }
   }
