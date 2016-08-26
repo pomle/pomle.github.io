@@ -1,6 +1,6 @@
 DIR=$(dirname $0)
 
-git submodule update --recursive
+git submodule foreach git pull origin master
 
 # nes-remote
 rm -rf "$DIR/../nes-remote" && \
