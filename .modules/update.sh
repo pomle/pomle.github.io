@@ -11,3 +11,5 @@ rm -rf "$DIR/../nes-remote" && \
 rm -rf "$DIR/../tetris" && \
    mkdir -p "$DIR/../tetris" && \
    cp -r "$DIR/tetris/"* "$DIR/../tetris/"
+
+git commit -a -m "Auto Update."
