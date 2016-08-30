@@ -51,15 +51,15 @@ function createPattern(type)
         ];
     } else if (type === 'SL') {
         return [
-            [0, 0, 0],
             [5, 5, 0],
             [0, 5, 5],
+            [0, 0, 0],
         ];
     } else if (type === 'SR') {
         return [
-            [0, 0, 0],
             [0, 6, 6],
             [6, 6, 0],
+            [0, 0, 0],
         ];
     } else if (type === 'T') {
         return [
@@ -120,22 +120,9 @@ function keyHandler(event) {
     const k = event.keyCode;
     if (event.type === 'keydown') {
         if (k === 69 || k === 81) {
-            rotate(player.matrix, k === 69 ? 1 : -1);
-            let test = 1;
-            while (collide(player, arena)) {
-                player.pos[0] += test;
-                test = -(test + (test > 0 ? 1 : -1));
-
-                if (Math.abs(test) > 5) {
-                    throw new Error('Rotate offset overflow');
-                }
-            }
+            playerRotate(player, k === 69 ? 1 : -1);
         } else if (k === 65 || k === 68) {
-            const diff = k === 65 ? -1 : 1;
-            player.pos[0] += diff;
-            if (collide(player, arena)) {
-                player.pos[0] -= diff;
-            }
+            playerMove(player, k === 65 ? -1 : 1);
         }
     }
 
@@ -161,6 +148,29 @@ function merge(dest, source, offset) {
     });
 }
 
+function playerMove(player, diff) {
+    player.pos[0] += diff;
+    if (collide(player, arena)) {
+        player.pos[0] -= diff;
+    }
+}
+
+function playerRotate(player, dir) {
+    rotate(player.matrix, dir);
+    const originX = player.pos[0];
+    const maxX = player.matrix[0].length;
+    let offsetX = 1;
+    while (collide(player, arena)) {
+        player.pos[0] += offsetX;
+        offsetX = -(offsetX + (offsetX > 0 ? 1 : -1));
+
+        if (offsetX > maxX) {
+            rotate(player.matrix, -dir);
+            player.pos[0] = originX;
+            break;
+        }
+    }
+}
 
 function rotate(matrix, dir) {
   transpose(matrix);
