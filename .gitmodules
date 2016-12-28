@@ -1,6 +1,3 @@
 [submodule ".modules/nes-remote"]
 	path = .modules/nes-remote
 	url = https://github.com/pomle/nes-remote
-[submodule ".modules/tetris"]
-	path = .modules/tetris
-	url = https://github.com/meth-meth-method/tetris.git
