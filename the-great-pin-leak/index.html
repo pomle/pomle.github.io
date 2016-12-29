@@ -1,0 +1,81 @@
+<html>
+  <head>
+    <title>Huge PIN leak in Hacker attack!! We got the whole list.</title>
+
+    <meta property="og:title" content="Millions of PINS leaked in Hacker Attack" />
+    <meta property="og:image" content="https://thisdata.com/blog/content/images/2016/08/HackerNews.jpg" />
+
+    <style type="text/css">
+      body {
+        font-family: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+        font-size: 16px;
+        margin: 2em;
+      }
+
+      header {
+        text-align: center;
+      }
+
+      input[name=search] {
+        display: block;
+        font-size: 32px;
+        letter-spacing: .3em;
+        margin: 1em auto;
+        text-align: center;
+      }
+
+      #pins {
+        font-size: 13px;
+      }
+
+      #pins > * {
+        float: left;
+        margin: .5em;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <img src="logo.png" >
+      <p>
+      Great PIN code hack. Millions of 4-digit pins leaked. We got the whole list. See if you're at risk!
+      </p>
+    </header>
+
+    <input placeholder="Your PIN" name="search" />
+
+    <div id="pins"></div>
+
+    <script type="text/javascript">
+      function pad(num) {
+        num += '';
+        while (num.length < 4) {
+          num = '0' + num;
+        }
+        return num;
+      }
+
+      const pins = document.querySelector('#pins');
+      const index = [];
+
+      for (let i = 0; i < 10000; ++i) {
+        const el = document.createElement('span');
+        const s = pad(i);
+        el.textContent = s;
+        index.push({ i, s, el });
+      }
+
+      index.slice().sort(() => Math.random() > .5).forEach(x => {
+        pins.appendChild(x.el);
+      });
+
+      document.querySelector('input[name=search]')
+          .addEventListener('keyup', (event) => {
+          const test = event.target.value;
+          index.forEach(({el}) => el.style.display = 'block');
+          index.filter(({s}) => s.indexOf(test) !== 0)
+               .forEach(({el}) => el.style.display = 'none');
+      });
+    </script>
+  </body>
+</html>
