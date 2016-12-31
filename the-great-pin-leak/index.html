@@ -73,10 +73,10 @@
 
       document.querySelector('input[name=search]')
           .addEventListener('keyup', (event) => {
-          const test = event.target.value;
-          index.forEach(({el}) => el.style.display = 'block');
-          index.filter(({s}) => s.indexOf(test) !== 0)
-               .forEach(({el}) => el.style.display = 'none');
+        const test = event.target.value;
+        index.forEach(({el}) => el.style.display = 'block');
+        index.filter(({s}) => s.indexOf(test) !== 0)
+             .forEach(({el}) => el.style.display = 'none');
       });
     </script>
   </body>
