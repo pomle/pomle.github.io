@@ -3,6 +3,9 @@ import Vec from './Vec.js';
 
 const SPEED = 5;
 
+canvas.width = document.body.offsetWidth;
+canvas.height = document.body.offsetHeight;
+
 const context = canvas.getContext('2d');
 const desired = new Vec(0, 0);
 
@@ -27,24 +30,33 @@ function intersection(fn) {
 
 function move(x, y) {
     subject.x += x;
+
     if (x > 0) {
         intersection(rect => {
-            subject.r = rect.l;
+            if (subject.r > rect.l) {
+                subject.r = rect.l;
+            }
         });
     } else if (x < 0) {
         intersection(rect => {
-            subject.l = rect.r;
+            if (subject.l < rect.r) {
+                subject.l = rect.r;
+            }
         });
     }
 
     subject.y += y;
     if (y > 0) {
         intersection(rect => {
-            subject.b = rect.t;
+            if (subject.b > rect.t) {
+                subject.b = rect.t;
+            }
         });
     } else if (y < 0) {
         intersection(rect => {
-            subject.t = rect.b;
+            if (subject.t < rect.b) {
+                subject.t = rect.b;
+            }
         });
     }
 
@@ -69,7 +81,7 @@ function draw() {
 function update() {
     const moveTo = new Vec(desired.x - subject.x, desired.y - subject.y);
     if (moveTo.len > 5) {
-        moveTo.len = SPEED;
+        moveTo.len /= 15;
         move(moveTo.x, moveTo.y);
     }
 
