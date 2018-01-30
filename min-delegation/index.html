@@ -1,0 +1,33 @@
+<html>
+  <body>
+    <div>
+      &lt;div&gt;
+      <a href="#" class="clickable">
+        &lt;a&gt;
+        <span class="inner">
+          &lt;span&gt;
+        </span>
+      </a>
+    </div>
+
+    <script type="text/javascript">
+      const matchers = [{
+        condition: (element) => {
+          return element.classList && element.classList.contains('clickable');
+        },
+        callback: (event, element) => {
+          console.log(event, element);
+        },
+      }];
+
+      document.getElementsByTagName('body')[0].addEventListener('click', function(e) {
+        matchers.forEach((matcher) => {
+          const element = e.path.find(matcher.condition);
+          if (element) {
+            matcher.callback(e, element);
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

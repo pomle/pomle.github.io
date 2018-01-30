@@ -1,0 +1,26 @@
+<html>
+<head>
+    <script type="module" src="main.js"></script>
+    <style>
+        @keyframes reveal {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        .images > div {
+            height: 320px
+        }
+
+        img {
+            animation: reveal 2s;
+        }
+    </style>
+</head>
+<body>
+    <div class="images"></div>
+</body>
+</html>

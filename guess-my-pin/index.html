@@ -1,0 +1,67 @@
+<html>
+  <head>
+    <title>Guess My Pin</title>
+    <style type="text/css">
+      body {
+        font-family: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+        font-size: 48px;
+        font-weight: 200;
+        margin: 2em;
+        text-align: center;
+      }
+
+      #adivina {
+        font-size: 144px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="pregunta">Is your PIN code higher than</div>
+    <div id="adivina"></div>
+    <div>Press Y or N</div>
+
+    <script type="text/javascript">
+      const pregunta = document.querySelector('#pregunta');
+      const adivina = document.querySelector('#adivina');
+
+      const range = [1, 9999];
+      let guess;
+
+      function pad(num) {
+        num += '';
+        while (num.length < 4) {
+          num = '0' + num;
+        }
+        return num;
+      }
+
+      function ask() {
+        guess = range[0] + (range[1] - range[0]) / 2 | 0;
+        if (range[0] === range[1]) {
+          pregunta.textContent = `Your PIN code is`;
+          adivina.textContent = pad(guess) + '!';
+          guess = null;
+          return;
+        }
+
+        adivina.textContent = pad(guess) + '?';
+      }
+
+      document.addEventListener('keydown', (event) => {
+        if (!guess) {
+          return;
+        }
+
+        if (event.key === 'y') {
+            range[0] = guess + 1;
+          } else if (event.key === 'n') {
+            range[1] = guess;
+          }
+          ask();
+      });
+
+      ask();
+
+    </script>
+  </body>
+</html>
